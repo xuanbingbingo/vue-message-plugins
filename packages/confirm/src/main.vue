@@ -19,65 +19,65 @@
     </transition>
   </template>
 
-  <script type="text/javascript">
-    export default {
-      name: 'bingo-confirm',
-      props: {
-        width: {
-          type: String,
-          default: '260px'
-        },
-        title: {
-          type: String,
-          default: '标题'
-        },
-        contentMessage: {
-          type: String,
-          default: '内容'
-        },
-        confirmMessage: {
-          type: String,
-          default: '确定'
-        },
-        cancelMessage: {
-          type: String,
-          default: '取消'
-        },
-        closeVisible: {
-          type: Boolean,
-          default: true
-        }
-      },
-      data () {
-        return {
-          visible: false,
-          fn: function(){
-            alert('默认函数起作用了！')
-          },
-          callback: function(){
-            alert('默认函数起作用了！')
-          }
-        }
-      },
-      methods: {
-        close () {
-          this.$emit('update:visible', false)
-        },
-        confirm (fn, callback) {
-          this.visible = false
-          return new Promise(function(resolve, reject){
-            fn()
-            .then(function(){
-              resolve()
-            })
-            .then(function(){
-              callback()
-            })
-          })
-        }
-      }
+<script type="text/javascript">
+export default {
+  name: "bingo-confirm",
+  props: {
+    width: {
+      type: String,
+      default: "260px"
+    },
+    title: {
+      type: String,
+      default: "标题"
+    },
+    contentMessage: {
+      type: String,
+      default: "内容"
+    },
+    confirmMessage: {
+      type: String,
+      default: "确定"
+    },
+    cancelMessage: {
+      type: String,
+      default: "取消"
+    },
+    closeVisible: {
+      type: Boolean,
+      default: true
     }
-  </script>
+  },
+  data () {
+    return {
+      visible: false,
+      fn: function () {
+        return Promise.resolve();
+      },
+      callback: function () {
+        alert("默认函数起2作用了！");
+      }
+    };
+  },
+  methods: {
+    close () {
+      this.$emit("update:visible", false);
+    },
+    confirm (fn, callback) {
+      this.visible = false;
+      return new Promise(function (resolve, reject) {
+        fn()
+          .then(function () {
+            resolve();
+          })
+          .then(function () {
+            callback();
+          });
+      });
+    }
+  }
+};
+</script>
 
   <style type="text/css">
     .bg{
@@ -98,4 +98,3 @@
 
     }
   </style>
-  
